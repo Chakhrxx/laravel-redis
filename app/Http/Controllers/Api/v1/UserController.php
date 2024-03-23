@@ -12,19 +12,19 @@ use OpenApi\Attributes as OA;
 
 class UserController extends Controller
 {
-    #[
-        OA\Get(
-            path: "/api/v1/user",
-            summary: "List all users",
-            tags: ["User"],
-            responses: [
-                new OA\Response(response: Response::HTTP_OK, description: "Users retrieved successfully!"),
-                new OA\Response(response: Response::HTTP_UNAUTHORIZED, description: "Unauthorized"),
-                new OA\Response(response: Response::HTTP_NOT_FOUND, description: "Not Found"),
-                new OA\Response(response: Response::HTTP_INTERNAL_SERVER_ERROR, description: "Server Error")
-            ]
-        )
-    ]
+    // #[
+    //     OA\Get(
+    //         path: "/api/v1/user",
+    //         summary: "List all users",
+    //         tags: ["User"],
+    //         responses: [
+    //             new OA\Response(response: Response::HTTP_OK, description: "Users retrieved successfully!"),
+    //             new OA\Response(response: Response::HTTP_UNAUTHORIZED, description: "Unauthorized"),
+    //             new OA\Response(response: Response::HTTP_NOT_FOUND, description: "Not Found"),
+    //             new OA\Response(response: Response::HTTP_INTERNAL_SERVER_ERROR, description: "Server Error")
+    //         ]
+    //     )
+    // ]
     // Display a listing of the resource.
     public function index()
     {
@@ -39,28 +39,28 @@ class UserController extends Controller
         return response()->json($users, 200);
     }
 
-    #[
-        OA\Get(
-            path: "/api/v1/user/{id}",
-            summary: "Get a user by ID",
-            tags: ["User"],
-            parameters: [
-                new OA\Parameter(
-                    description: "User ID",
-                    in: "path",
-                    name: "id",
-                    required: true,
-                    schema: new OA\Schema(type: "integer")
-                )
-            ],
-            responses: [
-                new OA\Response(response: Response::HTTP_OK, description: "User retrieved success"),
-                new OA\Response(response: Response::HTTP_UNAUTHORIZED, description: "Unauthorized"),
-                new OA\Response(response: Response::HTTP_NOT_FOUND, description: "not found"),
-                new OA\Response(response: Response::HTTP_INTERNAL_SERVER_ERROR, description: "Server Error")
-            ]
-        )
-    ]
+    // #[
+    //     OA\Get(
+    //         path: "/api/v1/user/{id}",
+    //         summary: "Get a user by ID",
+    //         tags: ["User"],
+    //         parameters: [
+    //             new OA\Parameter(
+    //                 description: "User ID",
+    //                 in: "path",
+    //                 name: "id",
+    //                 required: true,
+    //                 schema: new OA\Schema(type: "integer")
+    //             )
+    //         ],
+    //         responses: [
+    //             new OA\Response(response: Response::HTTP_OK, description: "User retrieved success"),
+    //             new OA\Response(response: Response::HTTP_UNAUTHORIZED, description: "Unauthorized"),
+    //             new OA\Response(response: Response::HTTP_NOT_FOUND, description: "not found"),
+    //             new OA\Response(response: Response::HTTP_INTERNAL_SERVER_ERROR, description: "Server Error")
+    //         ]
+    //     )
+    // ]
     // Display the specified resource.
     public function show(User $user)
     {
@@ -75,35 +75,35 @@ class UserController extends Controller
         return response()->json($user, 200);
     }
 
-    #[
-        OA\Post(
-            path: "/api/v1/user",
-            summary: "Create a user",
-            requestBody: new OA\RequestBody(
-                required: true,
-                content: new OA\MediaType(
-                    mediaType: "application/x-www-form-urlencoded",
-                    schema: new OA\Schema(
-                        required: ["name", "email", "password", "address", "phone"],
-                        properties: [
-                            new OA\Property(property: 'name', description: "User name", type: "string"),
-                            new OA\Property(property: 'email', description: "User email", type: "string"),
-                            new OA\Property(property: 'password', description: "User password", type: "string"),
-                            new OA\Property(property: 'address', description: "User address", type: "string"),
-                            new OA\Property(property: 'phone', description: "User phone", type: "string"),
-                        ]
-                    )
-                )
-            ),
-            tags: ["User"],
-            responses: [
-                new OA\Response(response: Response::HTTP_CREATED, description: "User has been created successfully!"),
-                new OA\Response(response: Response::HTTP_UNPROCESSABLE_ENTITY, description: "Unprocessable entity"),
-                new OA\Response(response: Response::HTTP_BAD_REQUEST, description: "Bad Request"),
-                new OA\Response(response: Response::HTTP_INTERNAL_SERVER_ERROR, description: "Server Error")
-            ]
-        )
-    ]
+    // #[
+    //     OA\Post(
+    //         path: "/api/v1/user",
+    //         summary: "Create a user",
+    //         requestBody: new OA\RequestBody(
+    //             required: true,
+    //             content: new OA\MediaType(
+    //                 mediaType: "application/x-www-form-urlencoded",
+    //                 schema: new OA\Schema(
+    //                     required: ["name", "email", "password", "address", "phone"],
+    //                     properties: [
+    //                         new OA\Property(property: 'name', description: "User name", type: "string"),
+    //                         new OA\Property(property: 'email', description: "User email", type: "string"),
+    //                         new OA\Property(property: 'password', description: "User password", type: "string"),
+    //                         new OA\Property(property: 'address', description: "User address", type: "string"),
+    //                         new OA\Property(property: 'phone', description: "User phone", type: "string"),
+    //                     ]
+    //                 )
+    //             )
+    //         ),
+    //         tags: ["User"],
+    //         responses: [
+    //             new OA\Response(response: Response::HTTP_CREATED, description: "User has been created successfully!"),
+    //             new OA\Response(response: Response::HTTP_UNPROCESSABLE_ENTITY, description: "Unprocessable entity"),
+    //             new OA\Response(response: Response::HTTP_BAD_REQUEST, description: "Bad Request"),
+    //             new OA\Response(response: Response::HTTP_INTERNAL_SERVER_ERROR, description: "Server Error")
+    //         ]
+    //     )
+    // ]
     // Store a newly created resource in storage.
     public function store(Request $request)
     {
@@ -118,37 +118,37 @@ class UserController extends Controller
         return response()->json(['message' => 'User has been created successfully!']);
     }
 
-    #[
-        OA\Put(
-            path: "/api/v1/user/{id}",
-            summary: "Update a user by ID",
-            tags: ["User"],
-            parameters: [
-                new OA\Parameter(
-                    description: "User ID",
-                    in: "path",
-                    name: "id",
-                    required: true,
-                    schema: new OA\Schema(type: "integer")
-                )
-            ],
-            requestBody: new OA\RequestBody(
-                required: true,
-                content: [
-                    new OA\MediaType(
-                        mediaType: "application/json",
-                        schema: new OA\Schema(type: "object")
-                    )
-                ]
-            ),
-            responses: [
-                new OA\Response(response: Response::HTTP_OK, description: "User updated success"),
-                new OA\Response(response: Response::HTTP_UNAUTHORIZED, description: "Unauthorized"),
-                new OA\Response(response: Response::HTTP_NOT_FOUND, description: "not found"),
-                new OA\Response(response: Response::HTTP_INTERNAL_SERVER_ERROR, description: "Server Error")
-            ]
-        )
-    ]
+    // #[
+    //     OA\Put(
+    //         path: "/api/v1/user/{id}",
+    //         summary: "Update a user by ID",
+    //         tags: ["User"],
+    //         parameters: [
+    //             new OA\Parameter(
+    //                 description: "User ID",
+    //                 in: "path",
+    //                 name: "id",
+    //                 required: true,
+    //                 schema: new OA\Schema(type: "integer")
+    //             )
+    //         ],
+    //         requestBody: new OA\RequestBody(
+    //             required: true,
+    //             content: [
+    //                 new OA\MediaType(
+    //                     mediaType: "application/json",
+    //                     schema: new OA\Schema(type: "object")
+    //                 )
+    //             ]
+    //         ),
+    //         responses: [
+    //             new OA\Response(response: Response::HTTP_OK, description: "User updated success"),
+    //             new OA\Response(response: Response::HTTP_UNAUTHORIZED, description: "Unauthorized"),
+    //             new OA\Response(response: Response::HTTP_NOT_FOUND, description: "not found"),
+    //             new OA\Response(response: Response::HTTP_INTERNAL_SERVER_ERROR, description: "Server Error")
+    //         ]
+    //     )
+    // ]
     // Update the specified resource in storage.
     public function update(Request $request, User $user)
     {
