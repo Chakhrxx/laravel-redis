@@ -15,7 +15,7 @@ services:
             MYSQL_USER: myuser
             MYSQL_PASSWORD: mypassword
         networks:
-            - mysql-phpmyadmin-cache
+            - laravel-redis
 
     # phpmyadmin
     phpmyadmin:
@@ -31,7 +31,7 @@ services:
             PMA_PASSWORD: mypassword
             MYSQL_ROOT_PASSWORD: mypassword
         networks:
-            - mysql-phpmyadmin-cache
+            - laravel-redis
 
     redis:
         image: redis:latest
@@ -51,10 +51,42 @@ services:
             - redisdata:/data
         restart: unless-stopped
         networks:
-            - mysql-phpmyadmin-cache
+            - laravel-redis
+
+    laravel:
+        build:
+            context: .
+            dockerfile: ./docker/Dockerfile.laravel
+        container_name: laravel
+        ports:
+            - "8000:8000"
+        networks:
+            - laravel-redis
+        environment:
+            - DB_PORT=3306
+            - REDIS_PORT=6379
+        depends_on:
+            - mysql
+            - redis
+
+    vite:
+        build:
+            context: .
+            dockerfile: ./docker/Dockerfile.vite
+        container_name: vite
+        ports:
+            - "5173:5173"
+        networks:
+            - laravel-redis
+        environment:
+            - DB_PORT=3306
+            - REDIS_PORT=6379
+        depends_on:
+            - mysql
+            - redis
 
 networks:
-    mysql-phpmyadmin-cache:
+    laravel-redis:
 
 volumes:
     db_data:
