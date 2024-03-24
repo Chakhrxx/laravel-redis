@@ -14,9 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/api-docs', function () {
+    return view('swagger');
+});
+
 Route::get('/', function () {
     return view('app');
-    // return view('pages.user.index');
 });
 
 Route::Resource('user', UserController::class);
